@@ -1,0 +1,188 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Management System - Admin</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Navigation Sidebar -->
+    <nav class="menu" tabindex="0">
+      <div class="smartphone-menu-trigger"></div>
+      <header class="avatar">
+        {% if request.user.admin.profile_pic %}
+        <img
+          src="{{ request.user.admin.profile_pic.url }}"
+          alt="Admin Profile"
+        />
+        {% else %}
+        <img src="{% static 'images/adminpropic.png' %}" alt="Admin Profile" />
+        {% endif %}
+        <h2>{{ request.user.first_name|default:"Admin" }}</h2>
+      </header>
+      <ul>
+        <li tabindex="0" class="icon-dashboard">
+          <a href="{% url 'admin-dashboard' %}">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li tabindex="0" class="icon-customers">
+          <a href="{% url 'admin-doctor' %}">
+            <i class="fas fa-user-md"></i>
+            <span>Doctors</span>
+          </a>
+        </li>
+        <li tabindex="0" class="icon-users">
+          <a href="{% url 'admin-patient' %}">
+            <i class="fas fa-users"></i>
+            <span>Patients</span>
+          </a>
+        </li>
+        <li tabindex="0" class="icon-calendar">
+          <a href="{% url 'admin-appointment' %}">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Appointments</span>
+          </a>
+        </li>
+        <li tabindex="0">
+          <a href="{% url 'admin-profile' %}">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li tabindex="0">
+          <a href="{% url 'logout' %}">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- Top Navigation Bar -->
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
+        style="
+          margin-left: 280px;
+          background: linear-gradient(
+            135deg,
+            #667eea 0%,
+            #764ba2 100%
+          ) !important;
+        "
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'admin-dashboard' %}">
+            <i class="fas fa-hospital"></i> Hospital Management System
+          </a>
+          <div class="navbar-nav ml-auto">
+            <span class="navbar-text mr-3">
+              Welcome, {{ request.user.first_name|default:"Admin" }}
+            </span>
+            <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="content-wrapper" style="margin-top: 80px">
+        {% block content %} {% endblock content %}
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-content">
+          <div class="row">
+            <div class="col-md-6">
+              <h5>
+                <i class="fas fa-hospital"></i> Hospital Management System
+              </h5>
+              <p>
+                Modern healthcare management solution for efficient patient care
+                and administration.
+              </p>
+            </div>
+            <div class="col-md-6 text-md-right">
+              <h5>Connect With Us</h5>
+              <div class="social-links">
+                <a
+                  href="https://www.facebook.com/hm.rakibul404/"
+                  class="btn btn-primary btn-sm mr-2"
+                >
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a
+                  href="https://web.whatsapp.com/"
+                  class="btn btn-success btn-sm mr-2"
+                >
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+                <a
+                  href="https://www.instagram.com/hm.rakibul404/"
+                  class="btn btn-danger btn-sm mr-2"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/md-rakib-hossen-howladar-453309379/"
+                  class="btn btn-info btn-sm"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <hr style="border-color: rgba(255, 255, 255, 0.3)" />
+          <div class="text-center">
+            <p>
+              &copy; 2026 Hospital Management System. Made in Bangladesh by
+              Rakib404
+            </p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+      $(document).ready(function () {
+        $(".smartphone-menu-trigger").click(function () {
+          $(".menu").toggleClass("active");
+        });
+
+        // Close menu when clicking outside on mobile
+        $(document).click(function (event) {
+          if (
+            !$(event.target).closest(".menu, .smartphone-menu-trigger").length
+          ) {
+            $(".menu").removeClass("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

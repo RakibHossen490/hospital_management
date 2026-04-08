@@ -1,0 +1,128 @@
+{% extends 'hospital/patient_base.html' %} {% load static %} {% block content %}
+
+<div class="profile-section fade-in-up">
+  <div class="profile-header">
+    {% if request.user.patient.profile_pic %}
+    <img
+      src="{{ request.user.patient.profile_pic.url }}"
+      alt="Profile Picture"
+      class="profile-avatar"
+    />
+    {% else %}
+    <img
+      src="{% static 'images/patientpropic.png' %}"
+      alt="Profile Picture"
+      class="profile-avatar"
+    />
+    {% endif %}
+    <h2>
+      {{ request.user.first_name|default:"Patient" }} {{ request.user.last_name
+      }}
+    </h2>
+    <p>{{ request.user.patient.symptoms }}</p>
+  </div>
+
+  <div class="profile-info">
+    <div class="info-item">
+      <h5><i class="fas fa-user"></i> Personal Information</h5>
+      <p><strong>Username:</strong> {{ request.user.username }}</p>
+      <p>
+        <strong>Email:</strong> {{ request.user.email|default:"Not provided" }}
+      </p>
+      <p>
+        <strong>Full Name:</strong> {{ request.user.first_name }} {{
+        request.user.last_name }}
+      </p>
+    </div>
+
+    <div class="info-item">
+      <h5><i class="fas fa-phone"></i> Contact Information</h5>
+      <p>
+        <strong>Mobile:</strong> {{ request.user.patient.mobile|default:"Not
+        provided" }}
+      </p>
+      <p>
+        <strong>Address:</strong> {{ request.user.patient.address|default:"Not
+        provided" }}
+      </p>
+    </div>
+
+    <div class="info-item">
+      <h5><i class="fas fa-heartbeat"></i> Medical Information</h5>
+      <p><strong>Symptoms:</strong> {{ request.user.patient.symptoms }}</p>
+      <p>
+        <strong>Status:</strong>
+        {% if request.user.patient.status %}
+        <span class="status-approved">Admitted</span>
+        {% else %}
+        <span class="status-pending">Pending Admission</span>
+        {% endif %}
+      </p>
+      <p>
+        <strong>Admit Date:</strong> {{ request.user.patient.admitDate|date:"M
+        d, Y" }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="form-modern fade-in-up">
+  <h4><i class="fas fa-edit"></i> Update Profile</h4>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-group-modern">
+      <label for="{{ userForm.first_name.id_for_label }}">First Name</label>
+      {{ userForm.first_name }}
+    </div>
+
+    <div class="form-group-modern">
+      <label for="{{ userForm.last_name.id_for_label }}">Last Name</label>
+      {{ userForm.last_name }}
+    </div>
+
+    <div class="form-group-modern">
+      <label for="{{ userForm.username.id_for_label }}">Username</label>
+      {{ userForm.username }}
+    </div>
+
+    <div class="form-group-modern">
+      <label for="{{ userForm.password.id_for_label }}">Password</label>
+      {{ userForm.password }}
+      <small class="form-text text-muted"
+        >Leave blank to keep current password</small
+      >
+    </div>
+
+    <div class="form-group-modern">
+      <label for="{{ patientForm.mobile.id_for_label }}">Mobile Number</label>
+      {{ patientForm.mobile }}
+    </div>
+
+    <div class="form-group-modern">
+      <label for="{{ patientForm.address.id_for_label }}">Address</label>
+      {{ patientForm.address }}
+    </div>
+
+    <div class="form-group-modern">
+      <label for="{{ patientForm.symptoms.id_for_label }}">Symptoms</label>
+      {{ patientForm.symptoms }}
+    </div>
+
+    <div class="form-group-modern">
+      <label for="{{ patientForm.profile_pic.id_for_label }}"
+        >Profile Picture</label
+      >
+      {{ patientForm.profile_pic }}
+      <small class="form-text text-muted"
+        >Upload a new profile picture (optional)</small
+      >
+    </div>
+
+    <button type="submit" class="btn btn-primary-modern btn-modern">
+      <i class="fas fa-save"></i> Update Profile
+    </button>
+  </form>
+</div>
+
+{% endblock content %}

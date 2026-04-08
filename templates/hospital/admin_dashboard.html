@@ -1,0 +1,107 @@
+{% extends 'hospital/admin_base.html' %} {% load static %} {% block content %}
+
+<div class="fade-in-up">
+  {% include 'hospital/admin_dashboard_cards.html' %}
+</div>
+
+<div class="table-container fade-in-up">
+  <h4><i class="fas fa-user-md"></i> Recent Doctors</h4>
+  <table class="table-modern">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Mobile</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in doctors %}
+      <tr>
+        <td>{{ d.get_name }}</td>
+        <td>{{ d.department }}</td>
+        <td>{{ d.mobile }}</td>
+        {% if d.status %}
+        <td><span class="status-approved">Approved</span></td>
+        <td>-</td>
+        {% else %}
+        <td><span class="status-pending">Pending</span></td>
+        <td>
+          <a
+            class="btn btn-success-modern btn-modern"
+            href="{% url 'approve-doctor' d.id %}"
+            title="Approve"
+          >
+            <i class="fas fa-check"></i> Approve
+          </a>
+          <a
+            class="btn btn-danger-modern btn-modern"
+            href="{% url 'reject-doctor' d.id %}"
+            title="Reject"
+            onclick="
+              return confirm('Are you sure you want to reject this doctor?');
+            "
+          >
+            <i class="fas fa-times"></i> Reject
+          </a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="table-container fade-in-up">
+  <h4><i class="fas fa-users"></i> Recent Patients</h4>
+  <table class="table-modern">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Symptoms</th>
+        <th>Mobile</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in patients %}
+      <tr>
+        <td>{{ p.get_name }}</td>
+        <td>{{ p.symptoms }}</td>
+        <td>{{ p.mobile }}</td>
+        <td>{{ p.address }}</td>
+        {% if p.status %}
+        <td><span class="status-approved">Admitted</span></td>
+        <td>-</td>
+        {% else %}
+        <td><span class="status-pending">Pending</span></td>
+        <td>
+          <a
+            class="btn btn-success-modern btn-modern"
+            href="{% url 'approve-patient' p.id %}"
+            title="Approve"
+          >
+            <i class="fas fa-check"></i> Approve
+          </a>
+          <a
+            class="btn btn-danger-modern btn-modern"
+            href="{% url 'reject-patient' p.id %}"
+            title="Reject"
+            onclick="
+              return confirm('Are you sure you want to reject this patient?');
+            "
+          >
+            <i class="fas fa-times"></i> Reject
+          </a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}

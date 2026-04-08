@@ -1,0 +1,28 @@
+<div class="dashboard-cards">
+  <div class="card-modern card-doctor">
+    <div class="card-icon">
+      <i class="fas fa-user-md"></i>
+    </div>
+    <h3>{{ doctorcount }}</h3>
+    <h4>Total Doctors</h4>
+    <p>Approval Required: {{ pendingdoctorcount }}</p>
+  </div>
+
+  <div class="card-modern card-patient">
+    <div class="card-icon">
+      <i class="fas fa-users"></i>
+    </div>
+    <h3>{{ patientcount }}</h3>
+    <h4>Total Patients</h4>
+    <p>Wants to Admit: {{ pendingpatientcount }}</p>
+  </div>
+
+  <div class="card-modern card-appointment">
+    <div class="card-icon">
+      <i class="fas fa-calendar-alt"></i>
+    </div>
+    <h3>{{ appointmentcount }}</h3>
+    <h4>Total Appointments</h4>
+    <p>Pending Approval: {{ pendingappointmentcount }}</p>
+  </div>
+</div>

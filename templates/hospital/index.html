@@ -1,0 +1,177 @@
+{% extends 'hospital/homebase.html' %} {% load static %} {% block content %}
+
+<style media="screen">
+  .hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('{% static "images/bg.jpg" %}') no-repeat center center;
+    background-size: cover;
+    opacity: 0.3;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    animation: fadeInUp 1.2s ease-out;
+  }
+
+  .emergency-section {
+    background: #fff;
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .emergency-title {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-emergency {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  }
+
+  .btn-emergency:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .features-section {
+    padding: 4rem 0;
+    background: #f8f9fa;
+  }
+
+  .feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    color: #667eea;
+    margin-bottom: 1rem;
+  }
+</style>
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to Hospital Management System</h1>
+    <p class="hero-subtitle">
+      Your health is our priority. Experience world-class healthcare services
+      with cutting-edge technology.
+    </p>
+  </div>
+</div>
+
+<div class="emergency-section">
+  <div class="container">
+    <h2 class="emergency-title">Need Emergency Care?</h2>
+    <p class="lead mb-4">
+      Our emergency services are available 24/7. Get immediate assistance for
+      critical conditions.
+    </p>
+    <a class="btn btn-emergency" href="/patientclick" role="button"
+      >Take Appointment Now</a
+    >
+  </div>
+</div>
+
+<div class="features-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon">🏥</div>
+          <h4>Advanced Facilities</h4>
+          <p>
+            State-of-the-art medical equipment and modern facilities for
+            comprehensive healthcare.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon">👨‍⚕️</div>
+          <h4>Expert Doctors</h4>
+          <p>
+            Highly qualified and experienced medical professionals dedicated to
+            your well-being.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon">💊</div>
+          <h4>Quality Medicine</h4>
+          <p>
+            Authentic medicines and personalized treatment plans for faster
+            recovery.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "hospital/admin_doctor_patient_card.html" %} {% endblock content %}

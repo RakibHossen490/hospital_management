@@ -1,102 +1,91 @@
 <!doctype html>
-{% load widget_tweaks %}
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>LazyCoder || MD Rakib Hossen Howladar</title>
+    <title>Patient Login</title>
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <style type="text/css">
+    <style>
       body {
-        color: #aa082e;
-        background-color: #b6bde7;
+        background: linear-gradient(to right, #dfe9f3, #ffffff);
         font-family: "Roboto", sans-serif;
       }
 
-      a:link {
-        text-decoration: none;
+      .login-card {
+        margin-top: 80px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       }
 
-      .note {
+      .login-header {
+        background: linear-gradient(to right, #0072ff, #8811c5);
+        color: white;
         text-align: center;
-        height: 80px;
-        background: -webkit-linear-gradient(left, #0072ff, #8811c5);
-        color: #fff;
+        padding: 20px;
+        border-radius: 15px 15px 0 0;
         font-weight: bold;
-        line-height: 80px;
-      }
-
-      .form-content {
-        padding: 5%;
-        border: 1px solid #ced4da;
-        margin-bottom: 2%;
       }
 
       .form-control {
-        border-radius: 1.5rem;
+        border-radius: 10px;
       }
 
-      .btnSubmit {
+      .btn-custom {
+        border-radius: 20px;
+        padding: 10px 30px;
+        background: #0072ff;
+        color: white;
         border: none;
-        border-radius: 1.5rem;
-        padding: 1%;
-        width: 20%;
-        cursor: pointer;
-        background: #0062cc;
-        color: #fff;
+      }
+
+      .btn-custom:hover {
+        background: #0056b3;
       }
     </style>
   </head>
 
   <body>
     {% include "hospital/navbar.html" %}
-    <br />
-    <br />
-    <br /><br />
 
-    <form method="post">
-      {% csrf_token %}
-      <div class="container register-form">
-        <div class="form">
-          <div class="note">
-            <p>Patient Login Page</p>
-          </div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <div class="card login-card">
+            <div class="login-header">Patient Login</div>
 
-          <div class="form-content">
-            <div class="row">
-              <div class="col-md-6">
+            <div class="card-body">
+              <form method="post">
+                {% csrf_token %}
+
                 <div class="form-group">
-                  {% render_field form.username class="form-control"
-                  placeholder="Username" %}
+                  <label>Username</label>
+                  {{ form.username }}
                 </div>
-              </div>
-              <div class="col-md-6">
+
                 <div class="form-group">
-                  {% render_field form.password class="form-control"
-                  placeholder="Password" %}
+                  <label>Password</label>
+                  {{ form.password }}
                 </div>
-              </div>
-            </div>
-            <button type="submit" class="btnSubmit">Login</button>
-            <div class="text-center">
-              Do not have account? <a href="patientsignup">Signup here</a>
+
+                <div class="text-center mt-4">
+                  <button type="submit" class="btn-custom">Login</button>
+                </div>
+
+                <div class="text-center mt-3">
+                  Do not have account? <a href="patientsignup">Signup here</a>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
-    </form>
+    </div>
 
-    <br /><br /><br />
+    <br /><br />
 
     {% include "hospital/footer.html" %}
   </body>

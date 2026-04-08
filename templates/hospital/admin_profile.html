@@ -28,17 +28,13 @@
       <p>
         <strong>Email:</strong> {{ request.user.email|default:"Not provided" }}
       </p>
-      <p>
-        <strong>Full Name:</strong> {{ request.user.first_name }} {{
-        request.user.last_name }}
-      </p>
+      <p><strong>Full Name:</strong> {{ request.user.admin.get_name }}</p>
     </div>
 
     <div class="info-item">
       <h5><i class="fas fa-phone"></i> Contact Information</h5>
       <p>
-        <strong>Mobile:</strong> {{ request.user.admin.mobile|default:"Not
-        provided" }}
+        <strong>Mobile:</strong> {{request.user.admin.get_mobile|default:"Notprovided" }}
       </p>
       <p>
         <strong>Status:</strong>
@@ -56,8 +52,7 @@
         <strong>Joined:</strong> {{ request.user.date_joined|date:"M d, Y" }}
       </p>
       <p>
-        <strong>Last Login:</strong> {{ request.user.last_login|date:"M d, Y
-        H:i" }}
+        <strong>Last Login:</strong> {{ request.user.last_login|date:"M d, YH:i" }}
       </p>
     </div>
   </div>

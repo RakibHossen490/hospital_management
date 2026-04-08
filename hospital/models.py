@@ -23,8 +23,12 @@ class Doctor(models.Model):
     @property
     def get_id(self):
         return self.user.id
+    @property
+    def get_mobile(self):
+        return self.mobile
     def __str__(self):
         return "{} ({})".format(self.user.first_name,self.department)
+    
 
 
 
@@ -58,6 +62,9 @@ class Admin(models.Model):
     @property
     def get_id(self):
         return self.user.id
+    @property
+    def get_mobile(self):
+        return self.mobile
     def __str__(self):
         return self.user.first_name
 

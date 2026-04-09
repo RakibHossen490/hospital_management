@@ -281,16 +281,19 @@ EMAIL_USE_TLS = True
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/homepage.png?raw=true)
+![Homepage](https://github.com/RakibHossen490/hospitalmanagement/blob/master/static/screenshots/homepage.png?raw=true)
 
 ### Admin Dashboard
-![Admin Dashboard](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/admin_dashboard.png?raw=true)
+![Admin Dashboard](https://github.com/RakibHossen490/hospitalmanagement/blob/master/static/screenshots/Admin_Dashboard_main.png?raw=true)
 
 ### Invoice Generation
-![Invoice](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/invoice.png?raw=true)
+![Doctor Dashboard](https://github.com/RakibHossen490/hospitalmanagement/blob/master/static/screenshots/Doctor_Dashboard.png?raw=true)
 
 ### Doctor Management
-![Doctor List](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/admin_doctor.png?raw=true)
+![Patient Dashboard](https://github.com/RakibHossen490/hospitalmanagement/blob/master/static/screenshots/Patient_Dashboard.png?raw=true)
+
+### Doctor Management
+![Patient Dashboard](https://github.com/RakibHossen490/hospitalmanagement/blob/master/static/screenshots/Doctor_Profile.png?raw=true)
 
 ---
 
@@ -438,16 +441,13 @@ This system is not suitable for handling real patient medical data without signi
 - **Name**: MD Rakib Hossen Howladar
 
 ### Get Help
-- Report Issues: [GitHub Issues](https://github.com/sumitkumar1503/hospitalmanagement/issues)
-- Contact: [Facebook](https://fb.com/sumit.luv)
+- Report Issues: [GitHub Issues](https://github.com/RakibHossen490)
+- Contact: [Facebook](https://www.facebook.com/hm.rakibul404)
 
 ### Resources
 - Django Documentation: [docs.djangoproject.com](https://docs.djangoproject.com)
 - Python Documentation: [python.org](https://www.python.org)
 - xhtml2pdf Documentation: [xhtml2pdf.readthedocs.io](https://xhtml2pdf.readthedocs.io)
-
-### Learning Resources
-- Subscribe: [LazyCoder YouTube Channel](https://youtube.com/lazycoders)
 
 ---
 

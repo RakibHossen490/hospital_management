@@ -504,6 +504,8 @@ def render_to_pdf(template_src, context_dict):
 
 def download_pdf_view(request,pk):
     dischargeDetails=models.PatientDischargeDetails.objects.all().filter(patientId=pk).order_by('-id')[:1]
+    if not dischargeDetails:
+       return HttpResponse('No discharge details found for this patient.')
     dict={
         'patientName':dischargeDetails[0].patientName,
         'assignedDoctorName':dischargeDetails[0].assignedDoctorName,

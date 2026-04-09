@@ -9,40 +9,147 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
       body {
-        background: linear-gradient(to right, #dfe9f3, #ffffff);
-        font-family: "Roboto", sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", sans-serif;
+        background: #f4f6f9;
+        color: #1f2937;
       }
 
-      .card {
-        border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      .page-shell {
+        min-height: calc(100vh - 120px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
       }
 
-      .card-header {
-        background: linear-gradient(to right, #0072ff, #8811c5);
-        color: white;
-        text-align: center;
-        padding: 15px;
-        border-radius: 15px 15px 0 0;
-        font-weight: bold;
-      }
-
-      .form-control {
+      .signup-card {
+        width: 100%;
+        max-width: 900px;
+        background: #ffffff;
         border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
       }
 
+      .form-panel {
+        padding: 45px 50px;
+      }
+
+      /* TITLE */
+      .form-panel h2 {
+        text-align: center;
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .form-panel p {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin-bottom: 30px;
+      }
+
+      /* GRID */
+      .form-row-custom {
+        display: flex;
+        gap: 25px;
+      }
+
+      .form-column {
+        flex: 1;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 18px;
+        padding-left: 6px;
+      }
+
+      .form-group label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 6px;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: #f9fafb;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: #2563eb;
+        background: #ffffff;
+        outline: none;
+      }
+
+      .form-group textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+
+      /* BUTTON */
       .btn-custom {
-        border-radius: 20px;
-        padding: 10px 30px;
-        background: #0072ff;
-        color: white;
+        width: 100%;
+        padding: 11px;
         border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-top: 10px;
+        transition: background 0.2s;
       }
 
       .btn-custom:hover {
-        background: #0056b3;
+        background: #1e40af;
+      }
+
+      /* FOOT */
+      .form-note {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #6b7280;
+      }
+
+      .form-note a {
+        color: #2563eb;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .form-note a:hover {
+        text-decoration: underline;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .form-panel {
+          padding: 30px 25px;
+        }
+
+        .form-row-custom {
+          flex-direction: column;
+        }
       }
     </style>
   </head>
@@ -50,79 +157,79 @@
   <body>
     {% include "hospital/navbar.html" %}
 
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-10">
-          <div class="card">
-            <div class="card-header">Patient Registration</div>
+    <div class="page-shell">
+      <div class="signup-card">
+        <div class="form-panel">
 
-            <div class="card-body">
-              <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
+          <h2>Patient Registration</h2>
+          <p>Fill in your details to create an account</p>
 
-                <div class="row">
-                  <!-- LEFT -->
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>First Name</label>
-                      {{ userForm.first_name }}
-                    </div>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-                    <div class="form-group">
-                      <label>Username</label>
-                      {{ userForm.username }}
-                    </div>
+            <div class="form-row-custom">
 
-                    <div class="form-group">
-                      <label>Address</label>
-                      {{ patientForm.address }}
-                    </div>
-
-                    <div class="form-group">
-                      <label>Symptoms</label>
-                      {{ patientForm.symptoms }}
-                    </div>
-
-                    <div class="form-group">
-                      <label>Profile Picture</label>
-                      {{ patientForm.profile_pic }}
-                    </div>
-                  </div>
-
-                  <!-- RIGHT -->
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Last Name</label>
-                      {{ userForm.last_name }}
-                    </div>
-
-                    <div class="form-group">
-                      <label>Password</label>
-                      {{ userForm.password }}
-                    </div>
-
-                    <div class="form-group">
-                      <label>Mobile</label>
-                      {{ patientForm.mobile }}
-                    </div>
-
-                    <div class="form-group">
-                      <label>Select Doctor</label>
-                      {{ patientForm.assignedDoctorId }}
-                    </div>
-                  </div>
+              <!-- LEFT -->
+              <div class="form-column">
+                <div class="form-group">
+                  <label>First Name</label>
+                  {{ userForm.first_name }}
                 </div>
 
-                <div class="text-center mt-4">
-                  <button type="submit" class="btn-custom">Register</button>
+                <div class="form-group">
+                  <label>Username</label>
+                  {{ userForm.username }}
                 </div>
 
-                <div class="text-center mt-3">
-                  Already have an account? <a href="patientlogin">Login here</a>
+                <div class="form-group">
+                  <label>Address</label>
+                  {{ patientForm.address }}
                 </div>
-              </form>
+
+                <div class="form-group">
+                  <label>Symptoms</label>
+                  {{ patientForm.symptoms }}
+                </div>
+
+                <div class="form-group">
+                  <label>Profile Picture</label>
+                  {{ patientForm.profile_pic }}
+                </div>
+              </div>
+
+              <!-- RIGHT -->
+              <div class="form-column">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  {{ userForm.last_name }}
+                </div>
+
+                <div class="form-group">
+                  <label>Password</label>
+                  {{ userForm.password }}
+                </div>
+
+                <div class="form-group">
+                  <label>Mobile</label>
+                  {{ patientForm.mobile }}
+                </div>
+
+                <div class="form-group">
+                  <label>Select Doctor</label>
+                  {{ patientForm.assignedDoctorId }}
+                </div>
+              </div>
+
             </div>
-          </div>
+
+            <button type="submit" class="btn-custom">Register</button>
+
+            <div class="form-note">
+              Already have an account? <a href="patientlogin">Login here</a>
+            </div>
+
+          </form>
+
         </div>
       </div>
     </div>

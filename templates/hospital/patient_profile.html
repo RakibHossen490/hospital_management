@@ -16,8 +16,7 @@
     />
     {% endif %}
     <h2>
-      {{ request.user.first_name|default:"Patient" }} {{ request.user.last_name
-      }}
+      {{ request.user.first_name|default:"Patient" }} {{ request.user.last_name|default:"Profile" }}
     </h2>
     <p>{{ request.user.patient.symptoms }}</p>
   </div>
@@ -30,20 +29,17 @@
         <strong>Email:</strong> {{ request.user.email|default:"Not provided" }}
       </p>
       <p>
-        <strong>Full Name:</strong> {{ request.user.first_name }} {{
-        request.user.last_name }}
+        <strong>Full Name:</strong> {{ request.user.first_name }} {{request.user.last_name }}
       </p>
     </div>
 
     <div class="info-item">
       <h5><i class="fas fa-phone"></i> Contact Information</h5>
       <p>
-        <strong>Mobile:</strong> {{ request.user.patient.mobile|default:"Not
-        provided" }}
+        <strong>Mobile:</strong> {{ request.user.patient.mobile|default:"Not provided" }}
       </p>
       <p>
-        <strong>Address:</strong> {{ request.user.patient.address|default:"Not
-        provided" }}
+        <strong>Address:</strong> {{ request.user.patient.address|default:"Not provided" }}
       </p>
     </div>
 
@@ -59,8 +55,7 @@
         {% endif %}
       </p>
       <p>
-        <strong>Admit Date:</strong> {{ request.user.patient.admitDate|date:"M
-        d, Y" }}
+        <strong>Admit Date:</strong> {{ request.user.patient.admitDate|date:"Md, Y" }}
       </p>
     </div>
   </div>

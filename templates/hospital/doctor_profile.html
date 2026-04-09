@@ -1,7 +1,191 @@
 {% extends 'hospital/doctor_base.html' %} {% load static %} {% block content %}
 
-<div class="profile-section fade-in-up">
-  <div class="profile-header">
+<style>
+  .doctor-profile-page {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+
+  .profile-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 18px 45px rgba(20, 35, 70, 0.08);
+    border: 1px solid #e8edf5;
+    padding: 30px;
+    margin-bottom: 26px;
+  }
+
+  .profile-avatar {
+    width: 132px;
+    height: 132px;
+    border-radius: 22px;
+    object-fit: cover;
+    border: 3px solid #0f4db0;
+    background: #f3f7ff;
+  }
+
+  .profile-header h2 {
+    margin: 0 0 8px;
+    color: #0f2f62;
+    font-size: 30px;
+    letter-spacing: -0.4px;
+  }
+
+  .profile-header p {
+    margin: 0;
+    color: #5f738f;
+    font-size: 16px;
+  }
+
+  .profile-label {
+    display: inline-block;
+    margin-top: 12px;
+    background: #f1f7ff;
+    color: #0f4db0;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .info-panel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .info-card {
+    background: #f8fbff;
+    border: 1px solid #dfe8f3;
+    border-radius: 18px;
+    padding: 24px;
+  }
+
+  .info-card h5 {
+    margin: 0 0 18px;
+    color: #0f3b6e;
+    font-size: 16px;
+    letter-spacing: -0.2px;
+  }
+
+  .info-card p {
+    margin: 9px 0;
+    color: #4f607d;
+    line-height: 1.7;
+  }
+
+  .status-approved,
+  .status-pending {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .status-approved {
+    background: #e8f7eb;
+    color: #1f7d32;
+  }
+
+  .status-pending {
+    background: #fff4df;
+    color: #b26809;
+  }
+
+  .update-card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 32px;
+    border: 1px solid #e6edf5;
+    box-shadow: 0 16px 38px rgba(18, 40, 75, 0.08);
+  }
+
+  .update-card h4 {
+    margin: 0 0 22px;
+    color: #102a50;
+    font-size: 22px;
+    letter-spacing: -0.3px;
+  }
+
+  .form-group-modern {
+    margin-bottom: 20px;
+  }
+
+  .form-group-modern label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #34405b;
+    font-weight: 600;
+  }
+
+  .form-group-modern input,
+  .form-group-modern select,
+  .form-group-modern textarea {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid #d2dae6;
+    border-radius: 14px;
+    padding: 12px 14px;
+    background: #f9fbff;
+    color: #1f334f;
+    font-size: 15px;
+  }
+
+  .form-text {
+    margin-top: 6px;
+    color: #677285;
+    font-size: 13px;
+  }
+
+  .btn-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 26px;
+    background: #0f4db0;
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .btn-modern:hover {
+    background: #0a3d88;
+    transform: translateY(-1px);
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.65s ease both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<div class="doctor-profile-page">
+  <div class="profile-summary fade-in-up">
     {% if request.user.doctor.profile_pic %}
     <img
       src="{{ request.user.doctor.profile_pic.url }}"
@@ -15,39 +199,42 @@
       class="profile-avatar"
     />
     {% endif %}
-    <h2>
-      Dr. {{ request.user.first_name|default:"Doctor" }} {{
-      request.user.last_name }}
-    </h2>
-    <p>{{ request.user.doctor.department }}</p>
+    <div class="profile-header">
+      <h2>
+        Dr. {{ request.user.first_name|default:"Doctor" }} {{request.user.last_name }}
+      </h2>
+      <p>{{ request.user.doctor.department }}</p>
+      {% if request.user.doctor.status %}
+      <span class="profile-label">Active Doctor</span>
+      {% else %}
+      <span class="profile-label">Pending Approval</span>
+      {% endif %}
+    </div>
   </div>
 
-  <div class="profile-info">
-    <div class="info-item">
+  <div class="info-panel fade-in-up">
+    <div class="info-card">
       <h5><i class="fas fa-user"></i> Personal Information</h5>
       <p><strong>Username:</strong> {{ request.user.username }}</p>
       <p>
         <strong>Email:</strong> {{ request.user.email|default:"Not provided" }}
       </p>
       <p>
-        <strong>Full Name:</strong> {{ request.user.first_name }} {{
-        request.user.last_name }}
+        <strong>Full Name:</strong> {{ request.user.first_name }} {{request.user.last_name }}
       </p>
     </div>
 
-    <div class="info-item">
+    <div class="info-card">
       <h5><i class="fas fa-phone"></i> Contact Information</h5>
       <p>
-        <strong>Mobile:</strong> {{ request.user.doctor.mobile|default:"Not
-        provided" }}
+        <strong>Mobile:</strong> {{ request.user.doctor.mobile|default:"Not provided" }}
       </p>
       <p>
-        <strong>Address:</strong> {{ request.user.doctor.address|default:"Not
-        provided" }}
+        <strong>Address:</strong> {{ request.user.doctor.address|default:"Not provided" }}
       </p>
     </div>
 
-    <div class="info-item">
+    <div class="info-card">
       <h5><i class="fas fa-stethoscope"></i> Professional Information</h5>
       <p><strong>Department:</strong> {{ request.user.doctor.department }}</p>
       <p>
@@ -60,65 +247,64 @@
       </p>
     </div>
   </div>
-</div>
 
-<div class="form-modern fade-in-up">
-  <h4><i class="fas fa-edit"></i> Update Profile</h4>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+  <div class="update-card fade-in-up">
+    <h4><i class="fas fa-edit"></i> Update Profile</h4>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group-modern">
+        <label for="{{ userForm.first_name.id_for_label }}">First Name</label>
+        {{ userForm.first_name }}
+      </div>
 
-    <div class="form-group-modern">
-      <label for="{{ userForm.first_name.id_for_label }}">First Name</label>
-      {{ userForm.first_name }}
-    </div>
+      <div class="form-group-modern">
+        <label for="{{ userForm.last_name.id_for_label }}">Last Name</label>
+        {{ userForm.last_name }}
+      </div>
 
-    <div class="form-group-modern">
-      <label for="{{ userForm.last_name.id_for_label }}">Last Name</label>
-      {{ userForm.last_name }}
-    </div>
+      <div class="form-group-modern">
+        <label for="{{ userForm.username.id_for_label }}">Username</label>
+        {{ userForm.username }}
+      </div>
 
-    <div class="form-group-modern">
-      <label for="{{ userForm.username.id_for_label }}">Username</label>
-      {{ userForm.username }}
-    </div>
+      <div class="form-group-modern">
+        <label for="{{ userForm.password.id_for_label }}">Password</label>
+        {{ userForm.password }}
+        <small class="form-text text-muted">
+          Leave blank to keep current password
+        </small>
+      </div>
 
-    <div class="form-group-modern">
-      <label for="{{ userForm.password.id_for_label }}">Password</label>
-      {{ userForm.password }}
-      <small class="form-text text-muted"
-        >Leave blank to keep current password</small
-      >
-    </div>
+      <div class="form-group-modern">
+        <label for="{{ doctorForm.mobile.id_for_label }}">Mobile Number</label>
+        {{ doctorForm.mobile }}
+      </div>
 
-    <div class="form-group-modern">
-      <label for="{{ doctorForm.mobile.id_for_label }}">Mobile Number</label>
-      {{ doctorForm.mobile }}
-    </div>
+      <div class="form-group-modern">
+        <label for="{{ doctorForm.address.id_for_label }}">Address</label>
+        {{ doctorForm.address }}
+      </div>
 
-    <div class="form-group-modern">
-      <label for="{{ doctorForm.address.id_for_label }}">Address</label>
-      {{ doctorForm.address }}
-    </div>
+      <div class="form-group-modern">
+        <label for="{{ doctorForm.department.id_for_label }}">Department</label>
+        {{ doctorForm.department }}
+      </div>
 
-    <div class="form-group-modern">
-      <label for="{{ doctorForm.department.id_for_label }}">Department</label>
-      {{ doctorForm.department }}
-    </div>
+      <div class="form-group-modern">
+        <label for="{{ doctorForm.profile_pic.id_for_label }}"
+          >Profile Picture</label
+        >
+        {{ doctorForm.profile_pic }}
+        <small class="form-text text-muted">
+          Upload a new profile picture (optional)
+        </small>
+      </div>
 
-    <div class="form-group-modern">
-      <label for="{{ doctorForm.profile_pic.id_for_label }}"
-        >Profile Picture</label
-      >
-      {{ doctorForm.profile_pic }}
-      <small class="form-text text-muted"
-        >Upload a new profile picture (optional)</small
-      >
-    </div>
-
-    <button type="submit" class="btn btn-primary-modern btn-modern">
-      <i class="fas fa-save"></i> Update Profile
-    </button>
-  </form>
+      <button type="submit" class="btn-modern">
+        <i class="fas fa-save"></i> Update Profile
+      </button>
+    </form>
+  </div>
 </div>
 
 {% endblock content %}

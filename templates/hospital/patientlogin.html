@@ -9,41 +9,126 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
       body {
-        background: linear-gradient(to right, #dfe9f3, #ffffff);
-        font-family: "Roboto", sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", sans-serif;
+        background: #f4f6f9;
+        color: #1f2937;
+      }
+
+      .page-shell {
+        min-height: calc(100vh - 120px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
       }
 
       .login-card {
-        margin-top: 80px;
-        border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .login-header {
-        background: linear-gradient(to right, #0072ff, #8811c5);
-        color: white;
-        text-align: center;
-        padding: 20px;
-        border-radius: 15px 15px 0 0;
-        font-weight: bold;
-      }
-
-      .form-control {
+        width: 100%;
+        max-width: 420px;
+        background: #ffffff;
         border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
       }
 
+      /* PANEL */
+      .form-panel {
+        padding: 40px 40px;
+      }
+
+      /* TITLE */
+      .form-panel h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .form-panel p {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin-bottom: 25px;
+      }
+
+      /* FORM */
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 18px;
+        padding-left: 4px;
+      }
+
+      .form-group label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 6px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: #f9fafb;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+      }
+
+      .form-group input:focus {
+        border-color: #2563eb;
+        background: #ffffff;
+        outline: none;
+      }
+
+      /* BUTTON */
       .btn-custom {
-        border-radius: 20px;
-        padding: 10px 30px;
-        background: #0072ff;
-        color: white;
+        width: 100%;
+        padding: 11px;
         border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-top: 10px;
+        transition: background 0.2s;
       }
 
       .btn-custom:hover {
-        background: #0056b3;
+        background: #1e40af;
+      }
+
+      /* FOOT */
+      .form-note {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #6b7280;
+      }
+
+      .form-note a {
+        color: #2563eb;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .form-note a:hover {
+        text-decoration: underline;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 576px) {
+        .form-panel {
+          padding: 30px 25px;
+        }
       }
     </style>
   </head>
@@ -51,41 +136,36 @@
   <body>
     {% include "hospital/navbar.html" %}
 
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-5">
-          <div class="card login-card">
-            <div class="login-header">Patient Login</div>
+    <div class="page-shell">
+      <div class="login-card">
+        <div class="form-panel">
 
-            <div class="card-body">
-              <form method="post">
-                {% csrf_token %}
+          <h2>Patient Login</h2>
+          <p>Enter your credentials to continue</p>
 
-                <div class="form-group">
-                  <label>Username</label>
-                  {{ form.username }}
-                </div>
+          <form method="post">
+            {% csrf_token %}
 
-                <div class="form-group">
-                  <label>Password</label>
-                  {{ form.password }}
-                </div>
-
-                <div class="text-center mt-4">
-                  <button type="submit" class="btn-custom">Login</button>
-                </div>
-
-                <div class="text-center mt-3">
-                  Do not have account? <a href="patientsignup">Signup here</a>
-                </div>
-              </form>
+            <div class="form-group">
+              <label>Username</label>
+              {{ form.username }}
             </div>
-          </div>
+
+            <div class="form-group">
+              <label>Password</label>
+              {{ form.password }}
+            </div>
+
+            <button type="submit" class="btn-custom">Login</button>
+
+            <div class="form-note">
+              Don’t have an account? <a href="patientsignup">Signup here</a>
+            </div>
+          </form>
+
         </div>
       </div>
     </div>
-
-    <br /><br />
 
     {% include "hospital/footer.html" %}
   </body>

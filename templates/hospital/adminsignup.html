@@ -1,35 +1,134 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>LazyCoder || MD Rakib Hossen Howladar</title>
+    <title>Admin Signup | Hospital Management</title>
 
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
       body {
-        background-color: #b6bde7;
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", sans-serif;
+        background: #f4f6f9;
+        color: #1f2937;
       }
-      .note {
+
+      .page-shell {
+        min-height: calc(100vh - 120px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+
+      .signup-card {
+        width: 100%;
+        max-width: 600px;
+        background: #ffffff;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      /* PANEL */
+      .form-panel {
+        padding: 45px 45px;
+      }
+
+      /* TITLE */
+      .form-panel h2 {
         text-align: center;
-        height: 80px;
-        background: linear-gradient(to right, #0072ff, #8811c5);
-        color: #fff;
-        font-weight: bold;
-        line-height: 80px;
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 8px;
       }
-      .form-content {
-        padding: 5%;
-        border: 1px solid #ced4da;
+
+      .form-panel p {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin-bottom: 25px;
       }
+
+      /* DJANGO FORM FIX */
+      .form-content p {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 18px;
+        padding-left: 5px;
+      }
+
+      .form-content label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 6px;
+      }
+
+      .form-content input {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: #f9fafb;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+      }
+
+      .form-content input:focus {
+        border-color: #2563eb;
+        background: #ffffff;
+        outline: none;
+      }
+
+      /* BUTTON */
       .btnSubmit {
-        border-radius: 1.5rem;
-        background: #0062cc;
-        color: white;
-        padding: 8px 20px;
+        width: 100%;
+        padding: 11px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: #fff;
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-top: 10px;
+        transition: background 0.2s;
+      }
+
+      .btnSubmit:hover {
+        background: #1e40af;
+      }
+
+      /* FOOT TEXT */
+      .login-link {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        text-align: center;
+        color: #6b7280;
+      }
+
+      .login-link a {
+        color: #2563eb;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 576px) {
+        .form-panel {
+          padding: 30px 25px;
+        }
       }
     </style>
   </head>
@@ -37,32 +136,30 @@
   <body>
     {% include "hospital/navbar.html" %}
 
-    <br /><br /><br /><br />
+    <div class="page-shell">
+      <div class="signup-card">
+        <div class="form-panel">
 
-    <form method="post">
-      {% csrf_token %}
+          <h2>Admin Registration</h2>
+          <p>Create your administrator account</p>
 
-      <div class="container register-form">
-        <div class="form">
-          <div class="note">
-            <p>Add New Admin To Hospital</p>
-          </div>
+          <form method="post">
+            {% csrf_token %}
 
-          <div class="form-content">
-            <!-- ✅ এখানে form.as_p -->
-            {{ form.as_p }}
-
-            <div class="text-center">
-              <button type="submit" class="btnSubmit">Submit</button>
+            <div class="form-content">
+              {{ form.as_p }}
             </div>
 
-            <div class="text-center mt-3">
-              Already have an account? <a href="adminlogin">Login here</a>
-            </div>
+            <button type="submit" class="btnSubmit">Create Account</button>
+          </form>
+
+          <div class="login-link">
+            Already have an account? <a href="adminlogin">Login here</a>
           </div>
+
         </div>
       </div>
-    </form>
+    </div>
 
     {% include "hospital/footer.html" %}
   </body>

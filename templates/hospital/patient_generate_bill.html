@@ -2,122 +2,144 @@
 {% load static %}
 {% block content %}
 
-<head>
-  <meta charset="utf-8">
-  <title>A simple, clean, and responsive HTML invoice template</title>
+<style>
+  .invoice-box {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 35px 40px;
+    border-radius: 10px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    font-family: "Inter", sans-serif;
+    color: #1f2937;
+  }
 
-  <style>
+  .invoice-box h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .invoice-box table {
+    width: 100%;
+  }
+
+  .invoice-box td {
+    padding: 10px 6px;
+    vertical-align: top;
+    font-size: 0.9rem;
+  }
+
+  .invoice-box .top td {
+    padding-bottom: 20px;
+  }
+
+  .invoice-box .top td:last-child {
+    text-align: right;
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+
+  .invoice-box .information td {
+    padding-bottom: 25px;
+  }
+
+  .invoice-box .information td:last-child {
+    text-align: right;
+  }
+
+  .heading td {
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+    padding-top: 15px;
+    padding-bottom: 8px;
+    color: #374151;
+  }
+
+  .details td {
+    padding-bottom: 20px;
+    color: #6b7280;
+  }
+
+  .item td {
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  /* INPUT STYLE */
+  .item input {
+    width: 120px;
+    padding: 8px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #f9fafb;
+    font-size: 0.85rem;
+    text-align: right;
+    transition: 0.2s;
+  }
+
+  .item input:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+    outline: none;
+  }
+
+  /* BUTTON */
+  .total input[type="submit"] {
+    width: 180px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .total input[type="submit"]:hover {
+    background: #1e40af;
+  }
+
+  .total td:last-child {
+    text-align: right;
+    padding-top: 20px;
+  }
+
+  @media (max-width: 600px) {
     .invoice-box {
-      max-width: 800px;
-      margin: auto;
-      padding: 30px;
-      border: 1px solid #eee;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-      font-size: 16px;
-      line-height: 24px;
-      font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-      color: #555;
+      padding: 25px 20px;
     }
 
-    .invoice-box table {
+    .invoice-box .top td,
+    .invoice-box .information td {
+      display: block;
+      text-align: left !important;
+    }
+
+    .item input {
       width: 100%;
-      line-height: inherit;
+    }
+
+    .total td:last-child {
       text-align: left;
     }
+  }
+</style>
 
-    .invoice-box table td {
-      padding: 5px;
-      vertical-align: top;
-    }
-
-    .invoice-box table tr td:nth-child(2) {
-      text-align: right;
-    }
-
-    .invoice-box table tr.top table td {
-      padding-bottom: 20px;
-    }
-
-    .invoice-box table tr.top table td.title {
-      font-size: 45px;
-      line-height: 45px;
-      color: #333;
-    }
-
-    .invoice-box table tr.information table td {
-      padding-bottom: 40px;
-    }
-
-    .invoice-box table tr.heading td {
-      background: #eee;
-      border-bottom: 1px solid #ddd;
-      font-weight: bold;
-    }
-
-    .invoice-box table tr.details td {
-      padding-bottom: 20px;
-    }
-
-    .invoice-box table tr.item td {
-      border-bottom: 1px solid #eee;
-    }
-
-    .invoice-box table tr.item.last td {
-      border-bottom: none;
-    }
-
-    .invoice-box table tr.total td:nth-child(2) {
-      border-top: 2px solid #eee;
-      font-weight: bold;
-    }
-
-    @media only screen and (max-width: 600px) {
-      .invoice-box table tr.top table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-      }
-
-      .invoice-box table tr.information table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-      }
-    }
-
-    /** RTL **/
-    .rtl {
-      direction: rtl;
-      font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-    }
-
-    .rtl table {
-      text-align: right;
-    }
-
-    .rtl table tr td:nth-child(2) {
-      text-align: left;
-    }
-
-    .menu {
-      top: 50px;
-    }
-  </style>
-</head>
-
-<br><br><br>
 <div class="invoice-box">
   <table cellpadding="0" cellspacing="0">
+
+    <!-- HEADER -->
     <tr class="top">
       <td colspan="2">
         <table>
           <tr>
-            <td class="title">
-              <h1>Hospital Management</h1>
-            </td>
-
             <td>
-
+              <h1>Hospital Billing</h1>
+            </td>
+            <td>
               Admit Date: {{admitDate}}<br>
               Release Date: {{todayDate}}<br>
               Days Spent: {{day}}
@@ -127,105 +149,75 @@
       </td>
     </tr>
 
+    <!-- PATIENT INFO -->
     <tr class="information">
       <td colspan="2">
         <table>
           <tr>
             <td>
-              Patient Name : {{name}}<br>
-              Patient Mobile : {{mobile}}<br>
-              Patient Addres : {{address}}<br>
+              <strong>Patient Info</strong><br>
+              {{name}}<br>
+              {{mobile}}<br>
+              {{address}}
             </td>
-
             <td>
-              Doctor Name :<br>
-              {{assignedDoctorName}}<br>
-
+              <strong>Doctor</strong><br>
+              {{assignedDoctorName}}
             </td>
           </tr>
         </table>
       </td>
     </tr>
 
+    <!-- SYMPTOMS -->
     <tr class="heading">
-      <td>
-        Disease and Symptoms
-      </td>
-      <td>
-
-      </td>
-
+      <td>Disease & Symptoms</td>
+      <td></td>
     </tr>
 
     <tr class="details">
-      <td>
-        {{symptoms}}
-      </td>
+      <td>{{symptoms}}</td>
     </tr>
-    <tr class="heading">
-      <td>
-        Item
-      </td>
 
-      <td>
-        Price
-      </td>
+    <!-- BILL -->
+    <tr class="heading">
+      <td>Item</td>
+      <td style="text-align:right;">Price (BDT)</td>
     </tr>
+
     <form method="post">
       {% csrf_token %}
 
       <tr class="item">
-        <td>
-          Room Charge (Per Day)
-        </td>
-
-        <td>
-          <input type="number" name="roomCharge" placeholder="In Rupees" value="">
-        </td>
+        <td>Room Charge (Per Day)</td>
+        <td><input type="number" name="roomCharge" placeholder="0"></td>
       </tr>
 
       <tr class="item">
-        <td>
-          Doctor Fee
-        </td>
-
-        <td>
-          <input type="number" name="doctorFee" placeholder="In Rupees" value="">
-        </td>
+        <td>Doctor Fee</td>
+        <td><input type="number" name="doctorFee" placeholder="0"></td>
       </tr>
 
       <tr class="item">
-        <td>
-          Medicine Cost
-        </td>
-
-        <td>
-          <input type="number" name="medicineCost" placeholder="In Rupees" value="">
-        </td>
+        <td>Medicine Cost</td>
+        <td><input type="number" name="medicineCost" placeholder="0"></td>
       </tr>
 
-      <tr class="item last">
-        <td>
-          Other Charge
-        </td>
-
-        <td>
-          <input type="number" name="OtherCharge" placeholder="In Rupees" value="">
-        </td>
+      <tr class="item">
+        <td>Other Charge</td>
+        <td><input type="number" name="OtherCharge" placeholder="0"></td>
       </tr>
 
       <tr class="total">
         <td></td>
-
         <td>
-          <input type="submit" name="submit" value="Generate Bill">
+          <input type="submit" value="Generate Bill">
         </td>
       </tr>
 
     </form>
+
   </table>
 </div>
-
-
 
 {% endblock content %}
